@@ -7,6 +7,7 @@ use gcode::{parse, GCode, Mnemonic};
 use serde::Deserialize;
 
 #[derive(Debug)]
+#[allow(dead_code)]
 struct GCodeEmote {
     gcode: GCode,
     emote: Option<String>,
@@ -74,8 +75,5 @@ fn main() {
 
     for emote in emotes {
         println!("{:?}", emote);
-        // if emote.gcode.mnemonic() != String::from("General") {
-        //     println!("{:?}", emote);
-        // }
     }
 }
