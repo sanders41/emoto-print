@@ -1,10 +1,15 @@
+mod option;
+
 use std::fs::{read_to_string, File};
 use std::io::BufReader;
 use std::path::Path;
 
 use anyhow::Result;
+use clap::Parser;
 use gcode::{parse, GCode, Mnemonic};
 use serde::Deserialize;
+
+use option::Opt;
 
 #[derive(Debug)]
 #[allow(dead_code)]
@@ -47,13 +52,10 @@ fn load_template_from_file<P: AsRef<Path>>(path: P) -> Result<Vec<Emote>> {
 }
 
 fn main() {
+    let opt = Opt::parse();
+    let gcode_path = &opt.gcode_path;
     let template = load_template_from_file("emotes.json").unwrap();
-    println!("{:#?}", template);
-
-    let src: String = read_to_string("/home/paul/Desktop/CCR6SE_biological.gcode")
-        .unwrap()
-        .parse()
-        .unwrap();
+    let src: String = read_to_string(gcode_path).unwrap().parse().unwrap();
     let gcodes: Vec<_> = parse(&src).collect();
     let mut emotes: Vec<GCodeEmote> = Vec::new();
 
