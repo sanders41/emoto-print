@@ -7,6 +7,13 @@ use clap::Parser;
 pub struct Opt {
     #[clap(long, required(true), help = "The path to the gcode file")]
     pub gcode_path: PathBuf,
+
+    #[clap(
+        long,
+        env = "EMOTO_PRINT_CUSTOM_EMOTE_PATH",
+        help = "Optionally pass a path to a custom emote JSON file"
+    )]
+    pub custom_emote_path: Option<PathBuf>,
 }
 
 #[cfg(test)]
