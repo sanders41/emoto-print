@@ -1,7 +1,9 @@
 [
   {"letter": "M", "number": 0, "emote": "(⇀‿‿↼)"},
   {"letter": "M", "number": 112, "emote": "(☉ʖ☉)"},
-  {"letter": "M", "number": 104, "emote": "(˘U˘◉)"},
-  {"letter": "M", "number": 140, "emote": "(˘U˘◉)"},
-  {"letter": "g", "number": 0, "emote": "(°▃▃°)"}
+  {"letter": "M", "number": 104, "emote": "☼"},
+  {"letter": "M", "number": 140, "emote": "☼"},
+  {"letter": "g", "number": 0, "emote": "(°▃▃°)"},
+  {"letter": "g", "number": 1, "emote": "(◕‿◕)"},
+  {"letter": "g", "number": 4, "emote": "(⚆_⚆)"}
 ]
