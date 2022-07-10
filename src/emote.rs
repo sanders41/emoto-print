@@ -27,8 +27,13 @@ pub struct GCodeEmote {
     pub emote: Option<String>,
 }
 
-fn load_emote_template_from_file<P: AsRef<Path>>(path: P) -> Result<Vec<Emote>> {
-    let file = File::open(path)?;
+fn load_emote_template_from_file<P: AsRef<Path>>(path: &Option<P>) -> Result<Vec<Emote>> {
+    let file: File;
+    if let Some(path) = path {
+        file = File::open(path)?;
+    } else {
+        file = File::open("emotes.json")?;
+    }
     let reader = BufReader::new(file);
     let template: Vec<EmoteJson> = serde_json::from_reader(reader)?;
     let mut emotes: Vec<Emote> = Vec::new();
@@ -46,8 +51,11 @@ fn load_emote_template_from_file<P: AsRef<Path>>(path: P) -> Result<Vec<Emote>> 
     Ok(emotes)
 }
 
-pub fn read_gcode_file<P: AsRef<Path>>(gcode_path: P) -> Result<Vec<GCodeEmote>> {
-    let template = load_emote_template_from_file("emotes.json").unwrap();
+pub fn read_gcode_file<P: AsRef<Path>>(
+    gcode_path: P,
+    custom_emote_path: &Option<P>,
+) -> Result<Vec<GCodeEmote>> {
+    let template = load_emote_template_from_file(custom_emote_path).unwrap();
     let src: String = read_to_string(gcode_path).unwrap().parse().unwrap();
     let gcodes: Vec<_> = parse(&src).collect();
     let mut emotes: Vec<GCodeEmote> = Vec::new();
