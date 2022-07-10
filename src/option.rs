@@ -14,7 +14,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_valid_opt() {
-        assert!(Opt::try_parse_from(Some("")).is_ok());
+    fn test_no_opt() {
+        assert!(Opt::try_parse_from(Some("")).is_err());
     }
 }
